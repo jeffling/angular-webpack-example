@@ -1,17 +1,23 @@
 path = require 'path'
 webpack = require 'webpack'
+ngminPlugin = require 'ngmin-webpack-plugin'
 
-appRoot = "#{__dirname}/client"
-styleRoot = "#{appRoot}/assets/styles"
+appRoot = "#{__dirname}/src"
+{{#bower}}
 bowerRoot = "#{__dirname}/bower_components"
+{{/bower}}
+
+styleRoot = "#{appRoot}/assets/styles"
 
 module.exports =
   cache: true
   debug: true
+
+  # The entry point
   entry: [
-    "#{appRoot}/config.js"
     "#{appRoot}/app.coffee"
   ]
+
   output:
     path: './target'
     filename: 'bundle.js'
@@ -23,10 +29,12 @@ module.exports =
       test: /\.css$/
       loaders: ['style','css']
     ,
+    {{#sass}}
       # required to write 'require('./style.scss')'
       test: /\.scss$/
       loaders: ['style','css',"sass?includePaths[]=#{styleRoot}"]
     ,
+    {{/sass}}
       test: /\.coffee$/
       loader: 'coffee'
     ,
@@ -48,7 +56,7 @@ module.exports =
       loader: 'file?prefix=font/'
     ,
       test: /[\/\\]angular\.js$/
-      loader: "exports?angular" 
+      loader: "exports?angular"
     ]
 
     # don't parse some dependencies to speed up build.
@@ -71,7 +79,7 @@ module.exports =
       '.scss'
       '.css'
     ]
-    
+
     root: appRoot
 
   plugins: [
@@ -82,6 +90,13 @@ module.exports =
 
     # disable dynamic requires (disable moment langs)
     new webpack.ContextReplacementPlugin(/.*$/, /a^/)
+
+    ### ngmin annotation
+    new ngminPlugin() # or, new ngminPlugin({dynamic: true}) for dynamic mode
+    ###
+
+    # # uglify
+    # new webpack.optimize.UglifyJsPlugin()
   ]
 
   devtool: 'eval'
