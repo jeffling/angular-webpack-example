@@ -18,7 +18,7 @@ module.exports = (config) ->
 
     # frameworks to use
     # available frameworks: https://npmjs.org/browse/keyword/karma-adapter
-    frameworks: ['mocha-debug', 'mocha', 'chai']
+    frameworks: ['mocha', 'chai']
 
     # list of files / patterns to load in the browser
     files: [
@@ -29,7 +29,7 @@ module.exports = (config) ->
 
     # list of files to exclude
     exclude: [
-      
+
     ]
 
     # preprocess matching files before serving them to the browser

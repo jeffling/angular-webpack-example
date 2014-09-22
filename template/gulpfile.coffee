@@ -12,58 +12,54 @@ webpack = require 'webpack'
 webpackConfig = require './webpack.config'
 ngminPlugin = require 'ngmin-webpack-plugin'
 
+if argv.production  # --production option
+  webpackConfig.plugins = webpackConfig.plugins.concat new ngminPlugin(),
+    new webpack.optimize.UglifyJsPlugin()
+  webpackConfig.devtool = false
+  webpackConfig.debug = false
+
 ports =
   livereload: 35729
 
 paths =
   other: [
     'src/**'
+    '!src/**/*.js'
     '!src/**/*.coffee'
     '!src/**/*.scss'
   ]
   targetDir: './target/'
 
 gulp.task 'webpack', (cb) ->
-  if argv.production  # --production option
-    webpackConfig.plugins = webpackConfig.plugins.concat new ngminPlugin(),
-      new webpack.optimize.UglifyJsPlugin()
-    webpackConfig.devtool = false
-    webpackConfig.debug = false
-
-  if not 'watch' in argv._ # watch option
-    webpack webpackConfig, (err, stats) ->
-      if (err)
-        throw new gutil.PluginError 'webpack', err
-      gutil.log '[webpack]', stats.toString
-        colors: true
-      cb()
-  else
-    webpack webpackConfig
-    .watch 200, (err, stats) ->
-      if (err)
-        throw new gutil.PluginError 'webpack', err
-      gutil.log '[webpack]', stats.toString
-        colors: true
+  webpack webpackConfig, (err, stats) ->
+    if (err)
+      throw new gutil.PluginError 'webpack', err
+    gutil.log '[webpack]', stats.toString
+      colors: true
     cb()
-
+  
+# gulp other, moves changed files from source to other
 gulp.task 'other', ->
   gulp.src paths.other
   .pipe changed paths.targetDir
   .pipe gulp.dest paths.targetDir
 
-# CLEARS THE TARGET DIRECTORY
+# gulp clearTarget 
+# clears target directory
 rimraf = require 'rimraf'
 gulp.task 'clearTarget', ->
   rimraf.sync paths.targetDir, gutil.log
 
+#gulp build
 gulp.task 'build', [
   'clearTarget'
   'webpack'
   'other'
 ]
 
-gulp.task 'watch', ['build'], ->
-  {{#fb-flo-livereloading}}
+# gulp watch
+gulp.task 'watch', ['clearTarget', 'other'], ->
+  {{#fbFlo}}
   fs = require 'fs'
   path = require 'path'
   flo = require 'fb-flo'
@@ -85,6 +81,18 @@ gulp.task 'watch', ['build'], ->
       resourceURL: url
       contents: fs.readFileSync paths.targetDir + filepath
       reload: reload
-  {{/fb-flo-livereloading}}
+  {{/fbFlo}}
+
+  webpack webpackConfig
+  .watch 200, (err, stats) ->
+    if (err)
+      throw new gutil.PluginError 'webpack', err
+    gutil.log '[webpack]', stats.toString
+      colors: true
+  cb()
 
   gulp.watch paths.other, ['other']
+
+# gulp
+gulp.task 'default', ['build']
+

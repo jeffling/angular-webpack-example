@@ -3,10 +3,7 @@ webpack = require 'webpack'
 ngminPlugin = require 'ngmin-webpack-plugin'
 
 appRoot = "#{__dirname}/src"
-{{#bower}}
 bowerRoot = "#{__dirname}/bower_components"
-{{/bower}}
-
 styleRoot = "#{appRoot}/assets/styles"
 
 module.exports =
@@ -88,15 +85,8 @@ module.exports =
       new webpack.ResolverPlugin.DirectoryDescriptionFilePlugin "bower.json", ["main"]
     ], ["normal", "loader"]
 
-    # disable dynamic requires (disable moment langs)
+    # disable dynamic requires
     new webpack.ContextReplacementPlugin(/.*$/, /a^/)
-
-    ### ngmin annotation
-    new ngminPlugin() # or, new ngminPlugin({dynamic: true}) for dynamic mode
-    ###
-
-    # # uglify
-    # new webpack.optimize.UglifyJsPlugin()
   ]
 
   devtool: 'eval'
