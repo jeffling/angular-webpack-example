@@ -9,7 +9,7 @@ It uses https://github.com/segmentio/khaos to generate the template.
 
 ```
 npm install -g khaos
-khaos jeffling/angular-webpack-example
+khaos create jeffling/angular-webpack-example <your project name>
 ```
 
 What it has
