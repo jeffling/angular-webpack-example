@@ -89,7 +89,6 @@ gulp.task 'watch', ['clearTarget', 'other'], ->
       throw new gutil.PluginError 'webpack', err
     gutil.log '[webpack]', stats.toString
       colors: true
-  cb()
 
   gulp.watch paths.other, ['other']
 
