@@ -33,6 +33,7 @@
     "karma-chai": "^0.1.0",
     "karma-chrome-launcher": "^0.1.4",
     "karma-mocha": "^0.1.9",
+    "karma-webpack": "^1.2.2",
     "minimist": "1.1.0",
     "mocha": "^1.21.4",
     "ngmin-webpack-plugin": "^0.1.3",
