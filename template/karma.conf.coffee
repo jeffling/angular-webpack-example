@@ -24,7 +24,7 @@ module.exports = (config) ->
     files: [
       'bower_components/angular/angular.js'
       'bower_components/angular-mocks/angular-mocks.js'
-      'client/**/*.spec.coffee'
+      'src/**/*.spec.coffee'
     ]
 
     # list of files to exclude
