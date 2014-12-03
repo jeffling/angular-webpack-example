@@ -14,7 +14,7 @@ khaos create jeffling/angular-webpack-example <your project name>
 
 What it has
 
-* webpack configured with the bower path included `bower/<module name>
+* webpack configured with the bower path included `bower/<module name>`
 * angular and karma. It loads angular globally.
 
 Optional stuff:
