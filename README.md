@@ -5,6 +5,8 @@ Webpack + Angular + Bower + Gulp
 
 Minimal boilerplate with webpack (run from gulp) that supports angular (from bower), with some common settings.
 
+It uses coffeescript, but you could very easily use the same configuration by stripping out the coffee loaders. 
+
 It uses https://github.com/segmentio/khaos to generate the template.
 
 ```
@@ -15,7 +17,8 @@ khaos create jeffling/angular-webpack-example <your project name>
 What it has
 
 * webpack configured with the bower path included `bower/<module name>`
-* angular and karma. It loads angular globally.
+* angular. Globally loaded
+* karma. looks for .spec.coffee files.
 
 Optional stuff:
 
