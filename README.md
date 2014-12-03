@@ -1,7 +1,7 @@
 Webpack + Angular + Bower + Gulp
 ================================
 
-*Right now the template is a work in progress, but I've used this configuration for projects in production.*
+*This template is kept bare-bones on purpose. If you have any questions or need advice on folder structure feel free to make an issue*
 
 Minimal boilerplate with webpack (run from gulp) that supports angular (from bower), with some common settings.
 
