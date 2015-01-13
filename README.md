@@ -1,6 +1,8 @@
 Webpack + Angular + Bower + Gulp
 ================================
 
+[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/jeffling/angular-webpack-example?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 *This template is kept bare-bones on purpose. If you have any questions or need advice on folder structure feel free to make an issue*
 
 Minimal boilerplate with webpack (run from gulp) that supports angular (from bower), with some common settings.
