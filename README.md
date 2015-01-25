@@ -26,3 +26,6 @@ Optional stuff:
 
 * facebook/flo for live reloading in the browser.
 * SASS loader
+
+
+We use something close to this at @BenchLabs. It allows us to compose our entire app from strictly isolated angular modules. http://labs.bench.co/2015/1/21/componentized-angular
